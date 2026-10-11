@@ -179,3 +179,14 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+# ── QML project ──────────────────────────────────────────────
+# Model weights / checkpoints (kept in Kaggle versions, not in git)
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+checkpoints/
+pretrained_pth/
+outputs_local/
+# macOS
+.DS_Store
