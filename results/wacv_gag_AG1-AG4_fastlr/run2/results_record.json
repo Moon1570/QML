@@ -1,0 +1,29 @@
+{
+    "experiment_name": "QAG_gag_AG1-AG2-AG3-AG4_L3_ClinicDB_run1",
+    "gate_mode": "gag",
+    "gate_targets": [
+        "AG1",
+        "AG2",
+        "AG3",
+        "AG4"
+    ],
+    "qag_layers": 3,
+    "init_seed": 42,
+    "run_number": 1,
+    "test_metrics": {
+        "dice": 0.9194350552464262,
+        "iou": 0.8674019953547515,
+        "sensitivity": 0.9235252549603539,
+        "specificity": 0.9949294511525071,
+        "precision": 0.9237392133189014,
+        "accuracy": 0.9912651909723011
+    },
+    "best_epoch": 142,
+    "best_val_dice": 0.9143090430789182,
+    "params_total": 408702,
+    "params_gate": 4484,
+    "params_mixer": 0,
+    "alpha_final": null,
+    "train_minutes": 83.9,
+    "gpu": "Tesla T4"
+}

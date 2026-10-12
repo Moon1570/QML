@@ -1,0 +1,40 @@
+{
+    "slug": "emcad_b0_baseline_clinicdb_run1",
+    "experiment": "emcad_b0_baseline",
+    "variant": "lgag",
+    "run_number": 1,
+    "seed": 42,
+    "encoder": "pvt_v2_b0",
+    "multiscale_mode": "official",
+    "use_amp": false,
+    "params_total": 3916795,
+    "params_lgag": 5513,
+    "best_epoch": 163,
+    "best_val_dice": 0.9386278074395353,
+    "test_best_official": {
+        "dice": 0.948294288274969,
+        "iou": 0.9047996708735836,
+        "sensitivity": 0.9529352104448234,
+        "specificity": 0.9970273805260953,
+        "precision": 0.947373781121044,
+        "accuracy": 0.9943835988837125
+    },
+    "test_best_corrected_orientation": {
+        "dice": 0.9495290978851176,
+        "iou": 0.9070473008081196,
+        "sensitivity": 0.9547217614160614,
+        "specificity": 0.9970585874328256,
+        "precision": 0.9480771068483723,
+        "accuracy": 0.9945241912149537
+    },
+    "test_last_official": {
+        "dice": 0.9483922907517601,
+        "iou": 0.904816536620456,
+        "sensitivity": 0.9518630066386854,
+        "specificity": 0.9970032810471119,
+        "precision": 0.9484437633555528,
+        "accuracy": 0.9944083921371473
+    },
+    "train_minutes": 110.9,
+    "gpu": "Tesla T4"
+}

@@ -38,8 +38,8 @@ Weights (`*.pth`) are gitignored. Kaggle versions keep the checkpoints.
 
 | ID | Notebook | Description | Status | Kaggle ver. | Test Dice (best) | Test Dice (last) | IoU | Params | Time | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Baseline 0 | `NB1_EMCAD_B0_Baseline_ClinicDB` | Official EMCAD-B0, original LGAG | ⬜ | | | | | 3,916,795 | | Smoke test first |
-| Baseline 1 | `litecm-unet-qml` (gag) | WACV hybrid, original gate, WACV recipe, 200 ep | ⬜ | | | | | 408,702 | | 150-ep run gave 0.8993 / IoU 0.8417 (reference only) |
+| Baseline 0 | `NB1_EMCAD_B0_Baseline_ClinicDB` | Official EMCAD-B0, original LGAG | ✅ ×3 | | **0.9486 ± 0.0008** | 0.9491 ± 0.0024 | 0.9052 | 3,916,795 | 111 min | Corrected (H,W) eval 0.9498. `results/baseline0_emcad_b0/` |
+| Baseline 1 | `litecm-unet-qml` (gag) | WACV hybrid, original gate, WACV recipe, 200 ep | ✅ ×3 | | **0.9158 ± 0.0048** | — | 0.8593 | 408,702 | 83 min | 150-ep run gave 0.8993 (reference only). `results/baseline1_wacv_gag_AG1/` |
 
 ---
 
@@ -51,9 +51,9 @@ All 3 LGAGs swapped (`lgag3` 22×22, `lgag2` 44×44, `lgag1` 88×88 @352). Gate 
 
 | ID | Notebook | GATE_MODE | What changes | Status | Kaggle ver. | Test Dice | IoU | Gate params | Time | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
-| NB2a | `NB2a_EMCAD_B0_QAG_Quantum_ClinicDB` | `replace` | LGAG fusion → 4-qubit entangling circuit | ⬜ | | | | | | |
-| NB2b | `NB2b_EMCAD_B0_QAG_Classical_ClinicDB` | `classical` | circuit → same-param MLP (22 vs 24) | ⬜ | | | | | | Key control |
-| NB2c | `NB2c_EMCAD_B0_NoGate_ClinicDB` | `none` | gates removed | ⬜ | | | | 0 | | Does gating matter? |
+| NB2a | `NB2a_EMCAD_B0_QAG_Quantum_ClinicDB` | `replace` | LGAG fusion → 4-qubit entangling circuit | 🟨 | | | | | | 1st try ran on CPU (no GPU), stopped at ep 39 after 12 h. Relaunched on GPU |
+| NB2b | `NB2b_EMCAD_B0_QAG_Classical_ClinicDB` | `classical` | circuit → same-param MLP (22 vs 24) | 🟨 | | | | | | Key control. Relaunched on GPU |
+| NB2c | `NB2c_EMCAD_B0_NoGate_ClinicDB` | `none` | gates removed | 🟨 | | | | 0 | | Does gating matter? Relaunched on GPU |
 | NB2d | `NB2d_EMCAD_B0_QAG_NoEntangle_ClinicDB` | `noent` | quantum circuit without CNOTs | ⬜ | | | | | | Isolates entanglement |
 
 ### Phase B: Quantum multi-scale fusion (MSDC). Compare against Baseline 0
@@ -82,12 +82,14 @@ All 3 LGAGs swapped (`lgag3` 22×22, `lgag2` 44×44, `lgag1` 88×88 @352). Gate 
 | D5 | Cross-dataset: ColonDB, ETIS, Kvasir (EMCAD splits) | ⬜ | |
 | D6 | Ablations: qubits, circuit depth, re-uploading on/off, which LGAGs | ⬜ | |
 
-### On hold: WACV hybrid track (Baseline 1 host)
+### WACV hybrid track (Baseline 1 host)
 
 | ID | GATE_MODE | Status | Notes |
 |---|---|---|---|
-| W-E1 | none | ⏸ | Waiting on Sir: recipe + host decision |
-| W-E2 | replace (quantum) | ⏸ | |
+| W-E0 | gag, AG1 (= Baseline 1) | ✅ ×3 | 0.9158 ± 0.0048 |
+| W-E0b | gag, all 4 gates in fast-LR group | ✅ ×3 | 0.9118 ± 0.0076 — LR group of gates does not matter. `results/wacv_gag_AG1-AG4_fastlr/` |
+| W-E1 | none | ⏸ | |
+| W-E2 | replace (quantum), AG1 | ✅ ×3 | 0.9123 ± 0.0147 (range 0.8954–0.9225). Ties Baseline 1. `results/wacv_qag_replace_AG1/` |
 | W-E3 | classical | ⏸ | |
 | W-E4 | augment | ⏸ | |
 
@@ -123,3 +125,4 @@ All 3 LGAGs swapped (`lgag3` 22×22, `lgag2` 44×44, `lgag1` 88×88 @352). Gate 
 | 5 Oct | Decided EMCAD-B0 study. NB1 built and CPU-tested (params 3,916,795 match official) |
 | 10 Oct | 200 epochs made the default for all notebooks (EMCAD and WACV) |
 | 11 Oct | Repo set up. Phase A notebooks (NB2a–d) built in the WACV structure and CPU-tested |
+| 12 Oct | Baseline 0 ×3: 0.9486 ± 0.0008. Baseline 1 (WACV gag) ×3: 0.9158 ± 0.0048. WACV quantum AG1 ×3: 0.9123 ± 0.0147 (tie). NB2a–c first attempt ran on CPU; added a GPU check, relaunched. Summary in `results/SUMMARY.md` |

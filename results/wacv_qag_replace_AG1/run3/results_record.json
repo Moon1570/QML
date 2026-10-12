@@ -1,0 +1,26 @@
+{
+    "experiment_name": "QAG_replace_AG1_L3_ClinicDB_run1",
+    "gate_mode": "replace",
+    "gate_targets": [
+        "AG1"
+    ],
+    "qag_layers": 3,
+    "init_seed": 42,
+    "run_number": 1,
+    "test_metrics": {
+        "dice": 0.9224608517428929,
+        "iou": 0.8675889017704941,
+        "sensitivity": 0.9358887288250103,
+        "specificity": 0.9952518271335751,
+        "precision": 0.9163521974267116,
+        "accuracy": 0.9922265858348973
+    },
+    "best_epoch": 173,
+    "best_val_dice": 0.9046240794460253,
+    "params_total": 408878,
+    "params_gate": 2243,
+    "params_mixer": 24,
+    "alpha_final": null,
+    "train_minutes": 91.2,
+    "gpu": "Tesla T4"
+}
